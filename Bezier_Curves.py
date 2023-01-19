@@ -23,17 +23,23 @@ def quadratic_Bezier(p1,p2,p3,n):
     return interpolated_points
 
 p1 = [0,0]
-p2 = [10,10]
-p3 = [15,0]
+p2 = [100,170]
+p3 = [150,920]
 n = 50
 
 points = lerp(p1,p2,n)
-print (points)
 points2 = lerp(p2,p3,n)
 qpoints = quadratic_Bezier(p1,p2,p3,n)
-plt.plot(points[:,0],points[:,1],"o-")
-plt.plot(points2[:,0],points2[:,1],"o-")
-plt.plot(qpoints[:,0],qpoints[:,1],"-")
+#plt.plot(points[:,0],points[:,1],"--")
+#plt.plot(points2[:,0],points2[:,1],"--")
+#plt.plot(qpoints[:,0],qpoints[:,1],"-")
+
+cols = ["tab:blue","tab:orange","tab:red","tab:green","tab:pink"]
+
+for i in range (1,6):
+    qpoints = quadratic_Bezier(p1,np.multiply(p2,i),p3,n)
+    plt.plot(qpoints[:,0],qpoints[:,1],"-",color=cols[i-1])
+    plt.scatter(np.multiply(p2,i)[0],np.multiply(p2,i)[1],color=cols[i-1])
 plt.show()
 
 #print (qpoints)
