@@ -9,7 +9,7 @@ def lerp(p1,p2,n):
     for i in range (n+1):
         t = i*steps
         interpolated_points[i] = np.multiply((1-t),p1) + np.multiply(t,p2)
-
+    
     return interpolated_points
 
 def quadratic_Bezier(p1,p2,p3,n):
@@ -36,9 +36,9 @@ def cubic_Bezier(p1,p2,p3,p4,n):
 
 
 p1 = [10,10]
-p2 = [100,170]
-p3 = [150,920]
-p4 = [200,7]
+p2 = [50,910]
+p3 = [250,220]
+p4 = [290,700]
 n = 50
 
 # qpoints = quadratic_Bezier(p1,p2,p3,n)
@@ -49,14 +49,14 @@ n = 50
 
 # cols = ["tab:blue","tab:orange","tab:red","tab:green","tab:pink"]
 
-lerp_points = lerp(p1,p2,n)
+lerp_points = cubic_Bezier(p1,p2,p3,p4,n)
 draw = lerp_points
 
 fig = plt.figure()
-ax = plt.axes(xlim=(0,1.1*max(draw[:,0])), ylim=(0,1.1*max(draw[:,1])))
-line, = ax.plot([],[],"-")
-ax.scatter([p1[0],p2[0]],[p1[1],p2[1]],color="gray")
-points = ax.scatter(p1[0],p1[1],color="black")
+ax = plt.axes(xlim=(0,300), ylim=(0,1000))
+line, = ax.plot([],[],"-",color="red",zorder=1)
+ax.scatter([p1[0],p2[0],p3[0],p4[0]],[p1[1],p2[1],p3[1],p4[1]],color="gray")
+points = ax.scatter(p1[0],p1[1],color="black",zorder=2)
 
 def update(i):
     to_draw = draw[:i]
